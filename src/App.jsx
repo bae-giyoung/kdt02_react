@@ -1,7 +1,9 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+//import reactLogo from './assets/react.svg'
+//import viteLogo from '/vite.svg' // root는 public을 기준으로 한다.
 import './App.css'
-import GroupText from './01/GroupText' // jsx의 확장자는 생략한다.
+//import MyClock from './02/MyClock'; // jsx의 확장자는 생략한다.
+//import MyDiv from './03/MyDiv'
+import MyList from './03/MyList'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -16,24 +18,10 @@ import GroupText from './01/GroupText' // jsx의 확장자는 생략한다.
 function App() {
   // 여기에 코드 작성 가능
 
-  // <></>는 프래그먼트 태그
   return (
-    <>
-      <div className="flex bg-emerald-700 justify-center">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-cyan-900 text-4xl font-bold my-2">Vite + React</h1>
-      
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <GroupText />
-    </>
+      //<MyClock/>
+      //<MyDiv />
+      <MyList />
   )
 }
 
