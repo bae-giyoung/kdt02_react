@@ -1,4 +1,4 @@
-export default function TailBall({num}) {
+export default function TailBall({num, isBonus}) {
     const bg = [
         "bg-red-200",
         "bg-amber-200",
@@ -8,8 +8,11 @@ export default function TailBall({num}) {
     ]
 
     return (
+        <>
+        {isBonus ? <span className="plus text-2xl font-extrabold">+</span> : ""}
         <div className={`w-16 h-16 rounded-full flex justify-center items-center text-2xl font-bold ${bg[Math.floor(num/10)]}`}>
             {num}
         </div>
+        </>
     )
 }

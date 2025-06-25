@@ -42,7 +42,7 @@ export default function Lotto() {
         <div className="flex flex-col h-full justify-center items-center">
             <div className="flex justify-center items-center gap-4 w-2xl min-h-30 border-2 p-5 rounded-2xl">
                 {
-                    lottoArr.map((item, idx) => <TailBall num={item} key={idx} />)
+                    lottoArr.map((item, idx) => <TailBall num={item} isBonus={idx == lottoArr.length-1} key={idx} />)
                 }
             </div>
             <TailButton caption="로또번호생성" color="blue" onHandle={handleNum}/>
