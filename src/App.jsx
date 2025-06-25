@@ -1,9 +1,9 @@
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg' // root는 public을 기준으로 한다.
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg' // root는 public을 기준으로 한다.
 import './App.css'
-//import MyClock from './02/MyClock'; // jsx의 확장자는 생략한다.
-//import MyDiv from './03/MyDiv'
-import MyList from './03/MyList'
+import GroupText from './01/GroupText' // jsx의 확장자는 생략 가능
+import MyList from './04/MyList'
+import Lotto from './05/Lotto'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -19,9 +19,26 @@ function App() {
   // 여기에 코드 작성 가능
 
   return (
-      //<MyClock/>
-      //<MyDiv />
-      <MyList />
+      <div className="w-full xl:w-8/10 mx-auto h-screen
+                    flex flex-col justify-start items-start">
+        <header className='w-full min-h-20 flex justify-between items-center
+                          bg-amber-50 px-10'>
+          <div className='flex gap-2'>
+            <img src={reactLogo} alt="react logo" />
+            +
+            <img src={viteLogo} alt="vite logo" />
+          </div>
+          <GroupText />
+        </header>
+        <main className='w-full flex-grow overflow-y-auto py-10
+                        flex flex-col justify-start items-center'>
+          <Lotto />
+        </main>
+        <footer className='w-full min-h-20 flex justify-center items-center
+                          bg-black text-white'>
+          K-Digital 2025 2기
+        </footer>
+      </div>
   )
 }
 
