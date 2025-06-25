@@ -1,4 +1,4 @@
-export default function TailBall({num, key}) {
+export default function TailBall({num}) {
     const bg = [
         "bg-red-200",
         "bg-amber-200",
