@@ -4,6 +4,9 @@ import './App.css'
 import GroupText from './01/GroupText' // jsx의 확장자는 생략 가능
 import MyList from './04/MyList'
 import Lotto from './05/Lotto'
+import Lotto2 from './05/Lotto2'
+import FoodMain from './06/FoodMain'
+import FoodMain2 from './06/FoodMain2'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -32,7 +35,7 @@ function App() {
         </header>
         <main className='w-full flex-grow overflow-y-auto py-10
                         flex flex-col justify-start items-center'>
-          <Lotto />
+          <FoodMain2 />
         </main>
         <footer className='w-full min-h-20 flex justify-center items-center
                           bg-black text-white'>

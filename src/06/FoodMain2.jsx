@@ -1,0 +1,28 @@
+import { useState } from "react";
+import FoodCard from './FoodCard';
+import TailButton from '../05/TailButton';
+import fooddata from './fooddata.json';
+
+export default function FoodMain2() {
+    const [gubunVal, setGubunVal] = useState("0.전체");
+    
+    // 구분값과 버튼 태그
+    let group = fooddata.map(item=>item["운영주체 분류"].replaceAll(" ", ""));
+    group = [...new Set(group)];
+    let buttons = group.map(item => <TailButton key={item} caption={item} color="blue" onHandle={()=>filterData(item)} />)
+    
+    // 구분값으로 json데이터 필터
+    const filterData = (item) => setGubunVal(item);
+
+    // 리스트 태그
+    const tags = fooddata
+            .filter(item => gubunVal == "0.전체" ? true : item["운영주체 분류"].replaceAll(" ", "") == gubunVal)
+            .map(item => <FoodCard item={item} key={item["사업장명"]} />)
+
+    return (
+        <div className="w-full h-full flex flex-col items-center">
+            <div className="flex justify-center gap-2 w-8/10 mb-5 p-5 bg-blue-100">{buttons}</div>
+            <div className="w-8/10 grid gap-5 grid-cols-1 lg:grid-cols-2 overflow-y-auto">{tags}</div>
+        </div>
+    )
+}

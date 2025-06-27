@@ -10,30 +10,23 @@ export default function Lotto() {
         while(arr.length < 6) {
             let num = Math.floor(Math.random()*45) + 1;
         
-            // 랜덤 수가 이미 있는 경우
             if (arr.includes(num)) continue;
             
-            // 랜덤 수가 없으면 배열에 추가
             arr.push(num);
         }
 
-        // 배열 정렬: 보너스 넘버 더하기 전에 정렬하기!
         arr.sort((a,b) => a - b);
 
-        // 보너스 번호(정렬과 상관없는)
         let bonusArr = [];
 
         while (bonusArr.length < 1) {
             let num = Math.floor(Math.random()*45) + 1;
             
-            // 랜덤 수가 이미 있는 경우
             if (arr.includes(num)) continue;
             
-            // 랜덤 수가 없으면 배열에 추가
             bonusArr.push(num);
         }
 
-        // 전체 배열
         arr = [...arr, ...bonusArr];
         setLotto(arr);
     }
