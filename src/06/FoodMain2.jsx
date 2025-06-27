@@ -6,15 +6,16 @@ import fooddata from './fooddata.json';
 export default function FoodMain2() {
     const [gubunVal, setGubunVal] = useState("0.전체");
     
-    // 구분값과 버튼 태그
-    let group = fooddata.map(item=>item["운영주체 분류"].replaceAll(" ", ""));
-    group = [...new Set(group)];
-    let buttons = group.map(item => <TailButton key={item} caption={item} color="blue" onHandle={()=>filterData(item)} />)
-    
     // 구분값 설정 함수
     const filterData = (item) => setGubunVal(item);
 
-    // json data를 구분값으로 필터링한 태그 배열 생성
+    // 버튼 태그 배열 생성
+    let group = fooddata.map(item=>item["운영주체 분류"].replaceAll(" ", ""));
+    group = [...new Set(group)];
+    let buttons = group.map(item => <TailButton key={item} caption={item} color="blue" onHandle={()=>filterData(item)} />)
+   
+
+    // json data를 구분값으로 필터링한 리스트 태그 배열 생성
     const tags = fooddata
             .filter(item => gubunVal == "0.전체" ? true : item["운영주체 분류"].replaceAll(" ", "") == gubunVal)
             .map(item => <FoodCard item={item} key={item["사업장명"]} />)
