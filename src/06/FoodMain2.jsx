@@ -10,10 +10,9 @@ export default function FoodMain2() {
     const filterData = (item) => setGubunVal(item);
 
     // 버튼 태그 배열 생성
-    let group = fooddata.map(item=>item["운영주체 분류"].replaceAll(" ", ""));
+    let group = fooddata.map(item => item["운영주체 분류"].replaceAll(" ", ""));
     group = [...new Set(group)];
-    let buttons = group.map(item => <TailButton key={item} caption={item} color="blue" onHandle={()=>filterData(item)} />)
-   
+    const buttons = group.map(item => <TailButton key={item} caption={item} color="blue" onHandle={() => filterData(item)} />)
 
     // json data를 구분값으로 필터링한 리스트 태그 배열 생성
     const tags = fooddata

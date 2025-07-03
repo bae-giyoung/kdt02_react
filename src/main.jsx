@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
+// <StrictMode></StrictMode>로 한번 더 검증하기 때문에 2번 실행된다
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />

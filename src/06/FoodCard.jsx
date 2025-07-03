@@ -24,8 +24,8 @@ export default function FoodCard({item}) {
             </p>
             {
                 !flag 
-                ? <p className="w-full h-6 bg-gray-700"></p> 
-                : <p className="bg-gray-700 text-white">{item["연락처(대표번호)"]}</p>            
+                ? <p className="w-full h-6 bg-gray-300"></p> 
+                : <p className="bg-gray-300">{item["연락처(대표번호)"]}</p>            
             }
         </div>
     </div>
