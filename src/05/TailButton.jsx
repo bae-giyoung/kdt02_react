@@ -8,9 +8,9 @@ export default function TailButton({caption, color, onHandle}) {
     return (
         <button type="button" 
                 onClick={onHandle}
-                className={`mt-5 bg-amber-950 ${bg[color]} text-white 
-                                        font-extrabold text-xl w-50 h-12 rounded-lg
-                                        hover:cursor-pointer`}>
+                className={`bg-amber-950 ${bg[color]} text-white px-4 
+                                        font-extrabold text-ml h-10 rounded-lg
+                                        hover:bg-blue-950 cursor-pointer`}>
             {caption}
         </button>
     )

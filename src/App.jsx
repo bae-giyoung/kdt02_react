@@ -11,6 +11,7 @@ import MyToggle from './07/MyToggle'
 import MyEffect from './08/MyEffect'
 import MyClock from './02/MyClock'
 import BoxOffice from './09/BoxOffice'
+import Traffic from './10/Traffic'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -39,7 +40,7 @@ function App() {
         </header>
         <main className='w-full flex-grow overflow-y-auto py-10
                         flex flex-col justify-start items-center'>
-          <BoxOffice />
+          <Traffic />
         </main>
         <footer className='w-full min-h-20 flex justify-center items-center
                           bg-black text-white'>

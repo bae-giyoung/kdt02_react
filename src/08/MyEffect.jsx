@@ -11,7 +11,7 @@ export default function MyEffect() {
     useEffect(()=>{console.log('useEffect []: ', cnt)}, [])
     //2. [cnt]: 특정 스테이트 변수가 변경이 될 때 실행
     useEffect(()=>{console.log('useEffect [cnt]: ', cnt)}, [cnt])
-    //3. 어떤 스테이트 변수던지 스테이트 변수가 변경이 되어 화면이 다시 그려질 때, 화면에 변화가 일어나면 무조건 실행!!!
+    //3. 없음: 어떤 스테이트 변수던지 스테이트 변수가 변경이 되어 화면이 다시 그려질 때, 화면에 변화가 일어나면 무조건 실행!!!
     useEffect(()=>{console.log('useEffect: ', cnt)})
 
     // 이 컴포넌트에서는 맨 처음 화면이 그려질 때 3가지 useEffect문 모두 실행됨
