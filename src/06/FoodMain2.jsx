@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FoodCard from './FoodCard';
-import TailButton from '../05/TailButton';
+import TailButton from '../component/TailButton';
 import fooddata from './fooddata.json';
 
 export default function FoodMain2() {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import TailButtonLine from './TailButtonLine'
+import TailButtonLine from '../component/TailButtonLine'
 
 export default function MyToggleBox({color}) {
     const [flag, setFlag] = useState(false) // 박스 상태가 바뀌니까 이 컴포넌트에서 useState 사용해야 함!

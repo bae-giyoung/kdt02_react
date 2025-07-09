@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import TailButton from "../05/TailButton";
+import TailButton from "../component/TailButton";
 
 export default function MyRef2() {
     const n1Ref = useRef();

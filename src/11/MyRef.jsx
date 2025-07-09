@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import TailButton from "../05/TailButton";
+import TailButton from "../component/TailButton";
 
 export default function MyRef() {
     // 컴포넌트 변수

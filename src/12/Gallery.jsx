@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from "react"
 import TailCard from "../component/TailCard"
-import GallerySearch from "../component/GallerySearch"
+import TailSearch from "../component/TailSearch"
 
 export default function Gallery() {
-    const [schKeyword, setSchKeyword] = useState('')
     const [tdata, setTdata] = useState([])
+    const [schKeyword, setSchKeyword] = useState('')
     const [gallItems, setGallItems] = useState([])
     const schKey = useRef()
 
@@ -21,22 +21,22 @@ export default function Gallery() {
 
     const getData = async () => { 
         if(schKeyword == '') return;
-        const apikey = import.meta.env.VITE_DATA_API
-        const baseUrl = 'https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1?'
-        const kw = encodeURI(schKeyword)
-        const url = `${baseUrl}serviceKey=${apikey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A&keyword=${kw}&_type=json`
+        const apikey = import.meta.env.VITE_DATA_API;
+        const baseUrl = 'https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1?';
+        const kw = encodeURI(schKeyword);
+        const url = `${baseUrl}serviceKey=${apikey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A&keyword=${kw}&_type=json`;
+        console.log(url)
         
         const resp = await fetch(url)
         const data = await resp.json()
-        console.log(data.response.body.items.item)
-        setTdata(data.response.body.items.item)
+        console.log(data.response.body.items.item, data.response)
+        if(data.response.body.numOfRows != 0) setTdata(data.response.body.items.item)
     }
 
     // 키워드 검색시 요청
     useEffect(() => { 
         if(schKeyword == '') return;
         getData()
-
     },[schKeyword])
 
     // 검색 결과 태그
@@ -57,7 +57,7 @@ export default function Gallery() {
     return (
         <div className="w-full flex flex-col justify-center items-center">
             <h3 className="text-2xl font-extrabold">한국관광공사 사진 정보</h3>
-            <GallerySearch keyRef={schKey} onHandle1={searchData} onHandle2={resetInput}/>
+            <TailSearch keyRef={schKey} onOk={searchData} onCancel={resetInput}/>
             <div className="w-full grid grid-cols-2 gap-3 lg:grid-cols-3 mt-6">
                 {gallItems}
             </div>

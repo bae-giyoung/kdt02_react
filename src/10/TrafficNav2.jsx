@@ -1,4 +1,4 @@
-import TailButton from "../05/TailButton"
+import TailButton from "../component/TailButton"
 
 export default function TrafficNav2({title, c, sel, setSel}) {
     const tag = c.map(item => <TailButton caption={item} color={item == sel ? "orange" : "blue"} onHandle={()=>setSel(item)} key={item}/>);

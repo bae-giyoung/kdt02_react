@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import TailButton from "../05/TailButton";
+import TailButton from "../component/TailButton";
 
 export default function MyEffect() {
     const [cnt, setCnt] = useState(0)

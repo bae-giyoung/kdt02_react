@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TailBall from "./TailBall"
-import TailButton from "./TailButton"
+import TailBall from "../component/TailBall"
+import TailButton from "../component/TailButton"
 
 export default function Lotto() {
     const [lottoArr=[], setLotto] = useState();
