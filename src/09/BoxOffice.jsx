@@ -68,7 +68,7 @@ export default function BoxOffice() {
         <div className="w-9/10 flex justify-end items-center mb-4">
             일자 기준
             <input className="ml-2 block p-2 ps-2 mx-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                type="date" ref={dateRef} defaultValue={yeterday} 
+                id="dt" type="date" ref={dateRef} defaultValue={yeterday} 
                 onChange={() => getFetchData(dateRef.current.value.replaceAll("-",""))}>
             </input>
         </div>
@@ -104,7 +104,7 @@ export default function BoxOffice() {
                 </tbody>
             </table>
         </div>
-        <div className="flex flex-col justify-center items-center w-9/10 my-5 h-10 bg-gray-200">{info}</div>
+        <div className="flex flex-col justify-center items-center w-9/10 my-5 h-10 bg-gray-50">{info}</div>
         </>
     )
 }

@@ -15,6 +15,8 @@ import Traffic from './10/Traffic'
 import Traffic2 from './10/Traffic2'
 import MyRef from './11/MyRef'
 import MyRef2 from './11/MyRef2'
+import Gallery from './12/Gallery'
+import Festival from './13/Festival'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -43,7 +45,7 @@ function App() {
         </header>
         <main className='w-full flex-grow overflow-y-auto py-10
                         flex flex-col justify-start items-center'>
-          <BoxOffice />
+          <Gallery />
         </main>
         <footer className='w-full min-h-20 flex justify-center items-center
                           bg-black text-white'>
