@@ -27,7 +27,7 @@ export default function Lotto2() {
 
     return (
         <div className="flex flex-col h-full justify-center items-center">
-            <div className="flex justify-center items-center gap-4 w-2xl min-h-30 border-2 p-5 rounded-2xl">
+            <div className="flex justify-center items-center gap-4 w-2xl min-h-30 border-2 p-5 rounded-2xl mb-10">
                 {
                     lottoTags.map(item => item == "+" ? <span key={`n${item}`} className="font-extrabold text-3xl m-2">{item}</span> : <TailBall2 key={`n${item}`} num={item} />)
                 }

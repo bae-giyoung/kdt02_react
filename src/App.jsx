@@ -1,3 +1,5 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AppNav from './AppNav'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg' // root는 public을 기준으로 한다.
 import './App.css'
@@ -17,6 +19,9 @@ import MyRef from './11/MyRef'
 import MyRef2 from './11/MyRef2'
 import Gallery from './12/Gallery'
 import Festival from './13/Festival'
+//import RouteMain from './14/RouteMain'
+import Fcst from './15/Fcst'
+import FcstList from './15/FcstList'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -29,9 +34,9 @@ import Festival from './13/Festival'
 //    => <></> 프래그먼트 태그: 하나로 묶어주는 역할만 함. 노드가 생기지 않음.
 
 function App() {
-  // 여기에 코드 작성 가능
 
   return (
+    <BrowserRouter>
       <div className="w-full xl:w-8/10 mx-auto h-screen
                     flex flex-col justify-start items-start">
         <header className='w-full min-h-20 flex justify-between items-center
@@ -41,17 +46,31 @@ function App() {
             +
             <img src={viteLogo} alt="vite logo" />
           </div>
+          <AppNav />
           <GroupText />
         </header>
         <main className='w-full flex-grow overflow-y-auto py-10
                         flex flex-col justify-start items-center'>
-          <Gallery />
+          <Routes>
+            <Route path='/' element={<MyClock />} />
+            <Route path='/lotto' element={<Lotto />} />
+            <Route path='/food' element={<FoodMain />} />
+            <Route path='/toggle' element={<MyToggle />} />
+            <Route path='/effect' element={<MyEffect />} />
+            <Route path='/boxoffice' element={<BoxOffice />} />
+            <Route path='/traffic' element={<Traffic />} />
+            <Route path='/gallery' element={<Gallery />} />
+            <Route path='/festival' element={<Festival />} />
+            <Route path='/fcst' element={<Fcst />} />
+            <Route path='/fcstlist' element={<FcstList />} />
+          </Routes>
         </main>
         <footer className='w-full min-h-20 flex justify-center items-center
                           bg-black text-white'>
           K-Digital 2025 2기
         </footer>
       </div>
+    </BrowserRouter>
   )
 }
 
