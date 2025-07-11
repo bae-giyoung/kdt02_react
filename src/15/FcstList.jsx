@@ -13,9 +13,6 @@ export default function FcstList() {
     const options = getcode.filter(item => item["예보구분"] == `${gubun}예보`)
                             .map(item => <option value={item["항목명"]} key={item["항목명"]}>{item["항목명"]}</option>);
 
-    // 항목명 찾을 데이터 구조
-    //
-
     const getData = async () => {
         const apikey = import.meta.env.VITE_DATA_API;
         const baseTime = gubun == '초단기' ? '0630' : '0500';
@@ -31,14 +28,21 @@ export default function FcstList() {
         setTdata(data.response.body.items.item);
     }
 
+    const transStringFormat = (str) => {
+        for(s in str) {
+            
+        }
+        return str;
+    }
+
     const makeLists = () => {
         const listTags = tdata.map((item, idx) => 
             <tr key={idx} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                 <td className="px-6 py-4">
-                    {item["category"]}
+                    {getcode.filter(it => it["항목값"] == item["category"])[0]["항목명"]}
                 </td>
                 <td className="px-6 py-4">
-                    {item["fcstDate"]}
+                    {transStringFormat(item["fcstDate"])}
                 </td>
                 <td className="px-6 py-4">
                     {item["fcstTime"]}
