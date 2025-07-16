@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg' // root는 public을 기준으로 한다.
 import './App.css'
 import GroupText from './01/GroupText' // jsx의 확장자는 생략 가능
+import MyDiv from './03/MyDiv'
 import MyList from './04/MyList'
 import Lotto from './05/Lotto'
 import Lotto2 from './05/Lotto2'
@@ -22,6 +23,7 @@ import Festival from './13/Festival'
 //import RouteMain from './14/RouteMain'
 import Fcst from './15/Fcst'
 import FcstList from './15/FcstList'
+import MyDivState from './17/MydivState'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -62,7 +64,7 @@ function App() {
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/festival' element={<Festival />} />
             <Route path='/fcst' element={<Fcst />} />
-            <Route path='/fcstlist' element={<FcstList />} />
+            <Route path='/divState' element={<MyDivState />} />
           </Routes>
         </main>
         <footer className='w-full min-h-20 flex justify-center items-center
