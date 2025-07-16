@@ -17,7 +17,7 @@ export default function Fcst() {
         console.log(gubun, dtRef.current.value, areaRef.current.value)
         
         // get방식으로 params 전달
-        navigate(`/fcstlist?gubun=${gubun}&date=${dtRef.current.value.replaceAll('-','')}&x=${x}&y=${y}`);
+        navigate(`/fcstlist?gubun=${gubun}&date=${dtRef.current.value}&x=${x}&y=${y}`);
     }
 
     useEffect(()=>{
