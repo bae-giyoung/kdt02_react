@@ -1,7 +1,7 @@
 //import { useEffect, useState } from 'react';
 import MydivState2 from './MydivState2';
 import { useAtom } from 'jotai';
-import { cntAtom, cntAtom2 } from "./CountAtoms"; // 커스텀: 전역 변수로 사용할 것들 선언한 파일
+import { cntAtom, cntAtom2 } from "./CountAtoms"; // 커스텀: 전역 변수들 선언한 파일
 
 export default function MyDivState() {
     // "./CountAtoms"에서 가져온 전역변수 cntAtom, cntAtom2 !!!

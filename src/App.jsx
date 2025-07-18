@@ -64,6 +64,7 @@ function App() {
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/festival' element={<Festival />} />
             <Route path='/fcst' element={<Fcst />} />
+            <Route path='/fcstlist' element={<FcstList />} />
             <Route path='/divState' element={<MyDivState />} />
           </Routes>
         </main>
