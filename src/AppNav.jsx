@@ -18,16 +18,6 @@ export default function AppNav() {
                 Food
             </div>
         </Link>
-        <Link to="/toggle" className="hover:text-black">
-            <div className="p-2 m-2 hover:border-b-1 bg-amber-50 font-bold">
-                Toggle
-            </div>
-        </Link>
-        <Link to="/effect" className="hover:text-black">
-            <div className="p-2 m-2 hover:border-b-1 bg-amber-50 font-bold">
-                Effect
-            </div>
-        </Link>
         <Link to="/boxoffice" className="hover:text-black">
             <div className="p-2 m-2 hover:border-b-1 bg-amber-50 font-bold">
                 Box Office
@@ -51,6 +41,11 @@ export default function AppNav() {
         <Link to="/fcst" className="hover:text-black">
             <div className="p-2 m-2 hover:border-b-1 bg-amber-50 font-bold">
                 Fcst
+            </div>
+        </Link>
+        <Link to="/station" className="hover:text-black">
+            <div className="p-2 m-2 hover:border-b-1 bg-amber-50 font-bold">
+                Station
             </div>
         </Link>
     </div>

@@ -24,6 +24,7 @@ import Festival from './13/Festival'
 import Fcst from './15/Fcst'
 import FcstList from './15/FcstList'
 import MyDivState from './17/MydivState'
+import ChargingStation from './18/ChargingStation'
 
 // [컴포넌트란]
 // 컴포넌트 == 사용자 정의 태그
@@ -57,8 +58,6 @@ function App() {
             <Route path='/' element={<MyClock />} />
             <Route path='/lotto' element={<Lotto />} />
             <Route path='/food' element={<FoodMain />} />
-            <Route path='/toggle' element={<MyToggle />} />
-            <Route path='/effect' element={<MyEffect />} />
             <Route path='/boxoffice' element={<BoxOffice />} />
             <Route path='/traffic' element={<Traffic />} />
             <Route path='/gallery' element={<Gallery />} />
@@ -66,6 +65,7 @@ function App() {
             <Route path='/fcst' element={<Fcst />} />
             <Route path='/fcstlist' element={<FcstList />} />
             <Route path='/divState' element={<MyDivState />} />
+            <Route path='/station' element={<ChargingStation />} />
           </Routes>
         </main>
         <footer className='w-full min-h-20 flex justify-center items-center
