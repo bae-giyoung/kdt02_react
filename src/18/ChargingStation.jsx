@@ -13,6 +13,7 @@ import TailPageNation from "../component/TailPageNation"
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function ChargingStation() {
+    // 뭔가 느린 느낌이라 확인해보기!!!!! form으로 안한 것도 생각해보기!
     const [tdata, setTdata] = useState([]);
     const [lists, setLists] = useState([]);
     const [area, setArea] = useState([]);
@@ -21,12 +22,14 @@ export default function ChargingStation() {
     const cityRef = useRef();
     const areaRef = useRef();
     const kindRef = useRef();
-    //let isDiffSearch = false;
+    const isInit = useRef(true);
     const showCnt = 12;
-    const totalPage = Math.ceil(totalCnt / showCnt);
-    // 뭔가 느린 느낌이라 확인해보기!!!!! form으로 안한 것도 생각해보기!
+    const totalPage = totalCnt != 0 ? Math.ceil(totalCnt / showCnt) : 1;
 
     const getSearchData = async (pageNo) => {
+        const loadingImg = document.querySelector("#loadingImg");
+        loadingImg.classList.remove("hidden");
+
         const apikey = import.meta.env.VITE_DATA_API;
         const baseUrl = 'https://apis.data.go.kr/B552584/EvCharger/getChargerInfo?';
         const url = `${baseUrl}serviceKey=${apikey}&pageNo=${pageNo}&numOfRows=${showCnt}&zcode=${cityRef.current.value}&zscode=${areaRef.current.value}&kind=${kindRef.current.value}&dataType=JSON`;
@@ -35,24 +38,19 @@ export default function ChargingStation() {
         const data = await resp.json();
         setTotalCnt(data.totalCount);
         setTdata(data.items.item);
+
+        loadingImg.classList.add("hidden");
     }
 
     const handleCity = () => {
-        if(cityRef.current.value == "") return;
-        setArea(zscode[cityRef.current.value]);
+        if(cityRef.current.value == "") 
+            setArea([]); // city가 변경되면 area의 option들이 다시 그려지기 때문에 return문이 아닌 빈 배열로 초기화해줬음
+        else 
+            setArea(zscode[cityRef.current.value]);
     }
 
-    const handleArea = () => {
-        if(areaRef.current.value == "") return;
-        if(cityRef.current.value == "") {
-            alert("지역을 선택하세요");
-            cityRef.current.focus();
-            return;
-        }
-    }
-
-    const handleKind = () => {
-        if(kindRef.current.value == "") return;
+    const handleSels = (selRef) => {
+        if(selRef.current.value == "") return;
         if(cityRef.current.value == "") {
             alert("지역을 선택하세요");
             cityRef.current.focus();
@@ -64,26 +62,24 @@ export default function ChargingStation() {
         if(cityRef.current.value == "") {
             alert("지역을 선택하세요");
             cityRef.current.focus();
-            return;
+            return false;
         }
+        return true;
     }
 
     const handleSearch = () => {
-        validateFrm();
-        //isDiffSearch = true;
-        //console.log("search : " + isDiffSearch);
-        getSearchData(1);
-        setCurPage(1);
+        if(validateFrm()) {
+            isInit.current = false;
+            getSearchData(1);
+            setCurPage(1);
+        }
     }
 
     const handlePage = (page) => {
-        // 시간 되면 loading gif같은거 넣어주기
-        //isDiffSearch = false;
-
-        document.querySelector("#loadingImg").classList.remove("hidden");
-
-        setCurPage(page);
-        getSearchData(page);
+        if(validateFrm()) {
+            setCurPage(page);
+            getSearchData(page);
+        }
     }
 
     const getDetailInfos = (ut, st, ct, bi, kid, dt) => {
@@ -97,22 +93,19 @@ export default function ChargingStation() {
     }
 
     useEffect(() => {
-        if(tdata.length == 0) return;
+        if(isInit.current) return;
+
         const listTags = tdata.map((item,idx) => 
             <TailCard key={idx}
                         title={item["statNm"]}
                         info={item["addr"]}
                         kwds={getDetailInfos(item["useTime"],item["stat"], item["chgerType"], item["busiId"], item["kind"], item["kindDetail"])} />
         )
+        
         setLists(listTags);
     }, [tdata]);
 
-    useEffect(() => {
-        if(tdata.length == 0 || lists.length == 0) return;
-        document.querySelector("#loadingImg").classList.add("hidden");
-    },[lists])
-
-    // useEffect(()=>{},[curPage])로 하면 검색 마다 curPage 초기화 될 경우 fetch요청이 두 번 될 수 있어서
+    // useEffect(()=>{},[curPage])로 하면 검색 마다 curPage 초기화 될 경우 fetch요청이 두 번 될 수 있어서 지울것
     /* useEffect(() => {
         if(tdata.length == 0) return;
         if(!isDiffSearch) {
@@ -123,24 +116,24 @@ export default function ChargingStation() {
 
   return (
     <>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">
             <TailSelect refName={cityRef} onHandle={handleCity} 
                 opKeys={Object.keys(zcode)} opValues={Object.values(zcode)} 
                 caption="지역 선택"/>
-            <TailSelect refName={areaRef} onHandle={handleArea}
+            <TailSelect refName={areaRef} onHandle={() => handleSels(areaRef)}
                 opKeys={Object.values(area)} opValues={Object.keys(area)} 
                 caption="지역 동 선택"/>
-            <TailSelect refName={kindRef} onHandle={handleKind} 
+            <TailSelect refName={kindRef} onHandle={() => handleSels(kindRef)} 
                 opKeys={Object.keys(kind)} opValues={Object.values(kind)} 
                 caption="충전소 구분 선택"/>
             <TailButton color="blue" caption="검색" onHandle={handleSearch} />
         </div>
-        <div className="relative">
-            <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        <div className="relative mt-8 mb-5">
+            <div className="w-full h-full grid grid-cols-2 lg:grid-cols-4 gap-4 box-border">
                 {lists}
             </div>
-            <div id="loadingImg" className="bg-white hidden">
-                <AiOutlineLoading3Quarters className="w-8/10 h-8/10 absolute left-1/2 top-1/2 -translate-1/2" />
+            <div id="loadingImg" className="absolute w-full h-full left-0 top-0 bg-gray-500/20 hidden overflow-hidden box-border">
+                <AiOutlineLoading3Quarters className="w-8/10 h-8/10 max-w-[200px] max-h-[200px] animate-spin absolute left-1/2 top-1/2 -translate-1/2" />
             </div>
         </div>
         <TailPageNation currentPage={curPage} totalPage={totalPage} onPageChange={(page) => handlePage(page)} />
