@@ -21,6 +21,7 @@ export default function ChargingStation() {
     const cityRef = useRef();
     const areaRef = useRef();
     const kindRef = useRef();
+    //let isDiffSearch = false;
     const showCnt = 12;
     const totalPage = Math.ceil(totalCnt / showCnt);
     // 뭔가 느린 느낌이라 확인해보기!!!!! form으로 안한 것도 생각해보기!
@@ -67,14 +68,20 @@ export default function ChargingStation() {
         }
     }
 
-    const handleSearch = (pageNo=1) => {
+    const handleSearch = () => {
         validateFrm();
-        getSearchData(pageNo);
-        if(curPage != 0 ) setCurPage(pageNo);
+        //isDiffSearch = true;
+        //console.log("search : " + isDiffSearch);
+        getSearchData(1);
+        setCurPage(1);
     }
 
     const handlePage = (page) => {
         // 시간 되면 loading gif같은거 넣어주기
+        //isDiffSearch = false;
+
+        document.querySelector("#loadingImg").classList.remove("hidden");
+
         setCurPage(page);
         getSearchData(page);
     }
@@ -100,10 +107,18 @@ export default function ChargingStation() {
         setLists(listTags);
     }, [tdata]);
 
-    // useEffect(()=>{},[curPage])로 하면 검색 마다 curPage 초기화 될 경우 fetch요청이 두 번 될 수 있어서 지움
+    useEffect(() => {
+        if(tdata.length == 0 || lists.length == 0) return;
+        document.querySelector("#loadingImg").classList.add("hidden");
+    },[lists])
+
+    // useEffect(()=>{},[curPage])로 하면 검색 마다 curPage 초기화 될 경우 fetch요청이 두 번 될 수 있어서
     /* useEffect(() => {
         if(tdata.length == 0) return;
-        getSearchData(curPage);
+        if(!isDiffSearch) {
+            console.log("paging : " + isDiffSearch);
+            getSearchData(curPage);
+        } // 다른 종류의 검색이 아닌 경우, 페이지 이동의 경우
     }, [curPage]); */
 
   return (
@@ -118,14 +133,14 @@ export default function ChargingStation() {
             <TailSelect refName={kindRef} onHandle={handleKind} 
                 opKeys={Object.keys(kind)} opValues={Object.values(kind)} 
                 caption="충전소 구분 선택"/>
-            <TailButton color="blue" caption="검색" onHandle={()=>handleSearch(1)} />
+            <TailButton color="blue" caption="검색" onHandle={handleSearch} />
         </div>
-        <div>
+        <div className="relative">
             <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
                 {lists}
             </div>
-            <div className="w-full h-full hidden">
-                <AiOutlineLoading3Quarters />
+            <div id="loadingImg" className="bg-white hidden">
+                <AiOutlineLoading3Quarters className="w-8/10 h-8/10 absolute left-1/2 top-1/2 -translate-1/2" />
             </div>
         </div>
         <TailPageNation currentPage={curPage} totalPage={totalPage} onPageChange={(page) => handlePage(page)} />
