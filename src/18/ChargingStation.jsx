@@ -37,7 +37,7 @@ export default function ChargingStation() {
         const url = `${baseUrl}serviceKey=${apikey}&pageNo=${pageNo}&numOfRows=${showCnt}&zcode=${cityRef.current.value}&zscode=${areaRef.current.value}&kind=${kindRef.current.value}&dataType=JSON`;
 
         const resp = await fetch(url);
-        const data = await resp.json();
+        const data = await resp.json();console.log(data.items.item);
         setTotalCnt(data.totalCount);
         setTdata(data.items.item);
 
@@ -84,7 +84,8 @@ export default function ChargingStation() {
         }
     }
 
-    const getDetailInfos = (useTime, st, ct, kind, kDt, output, mth, parkingFree) => {
+    const getDetailInfos = (ut, st, ct, kind, kDt, output, mth, parkingFree) => {
+        const useTime = ut == "~" ? '이용가능시간 확인 필요' : ut;
         const statVal = "충전기 상태: " + stat[st];
         const cType = "충전기 타입: " + chargertype[ct];
         const idx = Object.values(kinddetail[kind]).findIndex((val) => val == kDt);

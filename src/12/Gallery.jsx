@@ -31,7 +31,7 @@ export default function Gallery() {
         
         const resp = await fetch(url)
         const data = await resp.json()
-        console.log(data.response.body.items.item, data.response)
+        //console.log(data.response.body.items.item, data.response)
 
         if(isInit.current) isInit.current = false;
         if(data.response.body.numOfRows != 0) setTdata(data.response.body.items.item);
