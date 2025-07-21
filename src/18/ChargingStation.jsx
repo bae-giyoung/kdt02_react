@@ -84,21 +84,22 @@ export default function ChargingStation() {
         }
     }
 
-    const getDetailInfos = (ut, st, ct, bi, kid, dt) => {
-        const useTime = ut;
+    const getDetailInfos = (useTime, st, ct, kind, kDt, output, mth, parkingFree) => {
         const statVal = "충전기 상태: " + stat[st];
         const cType = "충전기 타입: " + chargertype[ct];
-        const idx = Object.values(kinddetail[kid]).findIndex((val) => val == dt);
-        const kindDt = "충전소 상세: " + Object.keys(kinddetail[kid])[idx];
-        const id = "기관: " + busid[bi];
-        return [useTime, statVal, cType, id, kindDt].join(",");
+        const idx = Object.values(kinddetail[kind]).findIndex((val) => val == kDt);
+        const kindDt = "충전소 상세: " + Object.keys(kinddetail[kind])[idx];
+        const vol = "충전 용량: " + output + 'KW';
+        const method = "충전 방식: " + mth;
+        const price = parkingFree == "Y" ? "유료" : "무료";
+        return [useTime, statVal, cType, vol, method, price, kindDt].join(",").replace("undefined", "정보없음");
     }
 
     useEffect(() => {
         let listTags = null;
         if(isInit.current) {
             listTags = <div className="col-span-2 lg:col-span-4 w-full h-full flex flex-col justify-center items-center gap-4">
-                <FaSearchengin className="w-28 h-28 text-gray-300" />
+                <FaSearchengin className="w-32 h-32 text-gray-300" />
                 <p className="font-extrabold text-gray-400 text-xl">충전소를 검색하세요.</p>
             </div>
         } else if(tdata.length == 0) {
@@ -111,7 +112,7 @@ export default function ChargingStation() {
                 <TailCard key={idx}
                             title={item["statNm"]}
                             info={item["addr"]}
-                            kwds={getDetailInfos(item["useTime"],item["stat"], item["chgerType"], item["busiId"], item["kind"], item["kindDetail"])} />
+                            kwds={getDetailInfos(item["useTime"], item["stat"], item["chgerType"], item["kind"], item["kindDetail"], item["output"], item["method"], item["parkingFree"])} />
             )
         }
         
