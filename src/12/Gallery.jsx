@@ -50,7 +50,7 @@ export default function Gallery() {
 
         let tm = null;
         if(tdata[0] == "no-data") {
-            tm = <div className="col-span-2 lg:col-span-3 w-full h-full flex flex-col justify-center items-center gap-4">
+            tm = <div className="col-span-2 lg:col-span-3 w-full flex flex-col justify-center items-center gap-4 box-border">
                         <IoSearchCircle className="w-28 h-28 text-gray-300" />
                         <p className="font-extrabold text-gray-400 text-xl">해당하는 데이터가 존재하지 않습니다.</p>
                     </div>
@@ -67,10 +67,10 @@ export default function Gallery() {
     },[tdata])
 
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-center">
             <h3 className="text-2xl font-extrabold">한국관광공사 사진 정보</h3>
             <TailSearch keyRef={schKey} onOk={searchData} onCancel={resetInput}/>
-            <div className="w-full h-full grid grid-cols-2 gap-3 lg:grid-cols-3 mt-6 flex-auto">
+            <div className="w-full grid grid-cols-2 gap-3 lg:grid-cols-3 mt-6 flex-auto box-border">
                 {gallItems}
             </div>
         </div>
