@@ -52,8 +52,8 @@ function App() {
           <AppNav />
           <GroupText />
         </header>
-        <main className='w-full flex-grow overflow-y-auto py-10
-                        flex flex-col justify-start items-center'>
+        <main className='w-full flex-grow overflow-y-auto py-10 px-4
+                        flex flex-col justify-start items-center box-border'>
           <Routes>
             <Route path='/' element={<MyClock />} />
             <Route path='/lotto' element={<Lotto />} />

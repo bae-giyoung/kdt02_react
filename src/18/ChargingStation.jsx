@@ -11,6 +11,8 @@ import busid from "../18/code/busid.json"
 import TailCard from "../component/TailCard"
 import TailPageNation from "../component/TailPageNation"
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaSearchengin } from "react-icons/fa";
+import { FaChargingStation } from "react-icons/fa";
 
 export default function ChargingStation() {
     // 뭔가 느린 느낌이라 확인해보기!!!!! form으로 안한 것도 생각해보기!
@@ -93,26 +95,30 @@ export default function ChargingStation() {
     }
 
     useEffect(() => {
-        if(isInit.current) return;
-
-        const listTags = tdata.map((item,idx) => 
-            <TailCard key={idx}
-                        title={item["statNm"]}
-                        info={item["addr"]}
-                        kwds={getDetailInfos(item["useTime"],item["stat"], item["chgerType"], item["busiId"], item["kind"], item["kindDetail"])} />
-        )
+        let listTags = null;
+        if(isInit.current) {
+            listTags = <div className="col-span-2 lg:col-span-4 w-full h-full flex flex-col justify-center items-center gap-4">
+                <FaSearchengin className="w-28 h-28 text-gray-300" />
+                <p className="font-extrabold text-gray-400 text-xl">충전소를 검색하세요.</p>
+            </div>
+        } else if(tdata.length == 0) {
+            listTags = <div className="col-span-2 lg:col-span-4 w-full h-full flex flex-col justify-center items-center gap-4">
+                <FaChargingStation className="w-28 h-28 text-gray-300" />
+                <p className="font-extrabold text-gray-400 text-xl">해당 지역에 충전소가 존재하지 않습니다.</p>
+            </div>
+        } else {
+            listTags = tdata.map((item,idx) => 
+                <TailCard key={idx}
+                            title={item["statNm"]}
+                            info={item["addr"]}
+                            kwds={getDetailInfos(item["useTime"],item["stat"], item["chgerType"], item["busiId"], item["kind"], item["kindDetail"])} />
+            )
+        }
         
         setLists(listTags);
     }, [tdata]);
 
     // useEffect(()=>{},[curPage])로 하면 검색 마다 curPage 초기화 될 경우 fetch요청이 두 번 될 수 있어서 지울것
-    /* useEffect(() => {
-        if(tdata.length == 0) return;
-        if(!isDiffSearch) {
-            console.log("paging : " + isDiffSearch);
-            getSearchData(curPage);
-        } // 다른 종류의 검색이 아닌 경우, 페이지 이동의 경우
-    }, [curPage]); */
 
   return (
     <>
@@ -128,7 +134,7 @@ export default function ChargingStation() {
                 caption="충전소 구분 선택"/>
             <TailButton color="blue" caption="검색" onHandle={handleSearch} />
         </div>
-        <div className="relative mt-8 mb-5">
+        <div className="relative w-full mt-8 mb-5 flex-auto">
             <div className="w-full h-full grid grid-cols-2 lg:grid-cols-4 gap-4 box-border">
                 {lists}
             </div>
