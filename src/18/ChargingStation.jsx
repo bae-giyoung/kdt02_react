@@ -84,19 +84,20 @@ export default function ChargingStation() {
         }
     }
 
-    const getDetailInfos = (ut, st, ct, kind, kDt, output, mth, parkingFree) => {
-        const useTime = ut == "~" ? '이용가능시간 확인 필요' : ut;
-        const statVal = "충전기 상태: " + stat[st];
-        const cType = "충전기 타입: " + chargertype[ct];
-        const idx = Object.values(kinddetail[kind]).findIndex((val) => val == kDt);
-        const kindDt = "충전소 상세: " + Object.keys(kinddetail[kind])[idx];
-        const vol = "충전 용량: " + output + 'KW';
-        const method = "충전 방식: " + mth;
-        const price = parkingFree == "Y" ? "유료" : "무료";
+    const getDetailInfos = (item) => {
+        const useTime = item["useTime"] == "~" ? '이용가능시간 확인 필요' : item["useTime"];
+        const statVal = "충전기 상태: " + stat[item["stat"]];
+        const cType = "충전기 타입: " + chargertype[item["chgerType"]];
+        const idx = Object.values(kinddetail[item["kind"]]).findIndex((val) => val == item["kindDetail"]);
+        const kindDt = "충전소 상세: " + Object.keys(kinddetail[item["kind"]])[idx];
+        const vol = "충전 용량: " + item["output"] + 'KW';
+        const method = "충전 방식: " + item["method"];
+        const price = item["parkingFree"] == "Y" ? "유료" : "무료";
+        
         return [useTime, statVal, cType, vol, method, price, kindDt].join(",").replace("undefined", "정보없음");
     }
 
-    useEffect(() => {
+    const makeListTags = () => {
         let listTags = null;
         if(isInit.current) {
             listTags = <div className="col-span-2 lg:col-span-4 w-full h-full flex flex-col justify-center items-center gap-4">
@@ -113,11 +114,15 @@ export default function ChargingStation() {
                 <TailCard key={idx}
                             title={item["statNm"]}
                             info={item["addr"]}
-                            kwds={getDetailInfos(item["useTime"], item["stat"], item["chgerType"], item["kind"], item["kindDetail"], item["output"], item["method"], item["parkingFree"])} />
+                            kwds={getDetailInfos(item)} />
             )
         }
-        
-        setLists(listTags);
+
+        return listTags;
+    }
+
+    useEffect(() => {
+        setLists(makeListTags());
     }, [tdata]);
 
     // useEffect(()=>{},[curPage])로 하면 검색 마다 curPage 초기화 될 경우 fetch요청이 두 번 될 수 있어서 지울것
